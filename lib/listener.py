@@ -39,21 +39,22 @@ while 1:
     if '@' in data:
         lat=data.split("@")[0]
         lon=data.split("@")[1]
-    
-    # Salir si los datos recogidos no son útiles
-    if data[:4] != '>REV':
-        continue
+        t=data.split("@")[2]
+    else:
+        # Salir si los datos recogidos no son útiles
+        if data[:4] != '>REV':
+            continue
 
-    lat = data[16:19] + '.' + data[19:24]
-    lon = data[24:28] + '.' + data[28:33]
+        lat = data[16:19] + '.' + data[19:24]
+        lon = data[24:28] + '.' + data[28:33]
 
-    # Obtener tiempo en un formato legible
-    m, s = divmod(int(data[11:16]), 60)
-    h, m = divmod(m, 60)
+        # Obtener tiempo en un formato legible
+        m, s = divmod(int(data[11:16]), 60)
+        h, m = divmod(m, 60)
 
-    time_high = "%d:%02d:%02d" % (h, m, s)
-    time_low = dt.datetime.fromtimestamp(time.time()).strftime('''%Y-%m-%d''')
-    t = time_low + ' ' + time_high
+        time_high = "%d:%02d:%02d" % (h, m, s)
+        time_low = dt.datetime.fromtimestamp(time.time()).strftime('''%Y-%m-%d''')
+        t = time_low + ' ' + time_high
 
     # Crear set de datos
     sent_data = (r_ip, r_port, lat, lon, t)
