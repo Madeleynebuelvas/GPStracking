@@ -35,6 +35,11 @@ while 1:
     lon = ''
     lat = ''
 
+    #determina si hay un @ en la cadena lo cual implica que es enviado por la aplicacion
+    if '@' in data:
+        lat=data.split("@")[0]
+        lon=data.split("@")[1]
+    
     # Salir si los datos recogidos no son útiles
     if data[:4] != '>REV':
         continue
